@@ -1,0 +1,52 @@
+Cloud Monitoring and Alerting Using AWS CloudWatch
+Project Overview
+
+This project demonstrates how to monitor cloud resources and configure automated alerts using AWS CloudWatch. An EC2 instance is monitored for CPU utilization, and alerts are triggered using Amazon SNS when CPU usage crosses a defined threshold. The project validates real-time monitoring, alerting, and recovery behavior.
+
+Architecture Explanation
+
+An EC2 instance continuously sends performance metrics such as CPU utilization to Amazon CloudWatch. CloudWatch evaluates these metrics against a predefined threshold. When the threshold is breached, CloudWatch triggers an alarm and sends a notification through Amazon SNS to the configured email address. Once CPU usage returns to normal, the alarm automatically resets to the OK state.
+
+AWS Services Used
+
+Amazon EC2 – Compute resource being monitored
+
+Amazon CloudWatch – Monitoring and alerting service
+
+Amazon SNS – Notification service for alerts
+
+Monitoring Configuration
+
+Metric Monitored: CPUUtilization
+
+Statistic: Average
+
+Threshold: ≥ 35% CPU usage
+
+Period: 1 minute
+
+Evaluation Periods: 2 out of 2
+
+Notification Method: SNS Email
+
+This configuration ensures fast and reliable alert triggering during sustained CPU load.
+
+Alerting Workflow
+
+EC2 instance runs under normal conditions (Alarm state: OK)
+
+CPU-intensive workload is generated on the instance
+
+CPU utilization exceeds 35% for 2 consecutive minutes
+
+CloudWatch alarm transitions to ALARM state
+
+SNS sends email notification
+
+Load is stopped
+Recovery Verification
+
+After stopping the CPU load, the alarm automatically returned to the OK state, confirming that the monitoring and alerting lifecycle works as expected.
+CPU usage returns to normal
+
+Alarm transitions back to OK state
